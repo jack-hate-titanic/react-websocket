@@ -1,3 +1,6 @@
+
+
+const server = require('./bin/www');
 var app = require('koa')()
   , logger = require('koa-logger')
   , json = require('koa-json')
@@ -18,6 +21,7 @@ app.use(views('views', {
 app.use(require('koa-bodyparser')());
 app.use(json());
 app.use(logger());
+
 
 app.use(function *(next){
   var start = new Date;

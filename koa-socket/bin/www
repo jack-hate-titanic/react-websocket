@@ -3,16 +3,19 @@
 /**
  * Module dependencies.
  */
-
+const ws = require('ws');
+const { createWebSocketServer } = require('../webSocket');
 var app = require('../app');
 var debug = require('debug')('demo:server');
 var http = require('http');
+
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8081');
+var port = normalizePort(process.env.PORT || '8083');
+
 // app.set('port', port);
 
 /**
@@ -88,3 +91,7 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+const WebSocketServer = ws.Server;
+app.wss = createWebSocketServer(server, WebSocketServer);
+module.exports = { server };
